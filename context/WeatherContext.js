@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
 export const WeatherContext = createContext();
@@ -9,11 +10,13 @@ const WeatherProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [weather, setWeather] = useState(null);
   const [forcast, setForcast] = useState([]);
-  const [favorites, setFavorites] = useState({});
+  const [favorites, setFavorites] = useState([]);
   const [error, setError] = useState("");
+  const [units, setUnits] = useState("metric");
 
   useEffect(() => {
-    const lastCity = localStorage.getItem("lastCity");
+    const lastCity = localStorage.getItem("lastSearchCity");
+    console.log(lastCity, "last");
     if (lastCity) {
       handleWeather(lastCity);
     }
@@ -24,17 +27,19 @@ const WeatherProvider = ({ children }) => {
     setLoading(true);
     try {
       const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${apiKey}`
       );
-      const forcastResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`
+      const forecastResponse = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&appid=${apiKey}`
       );
-      console.log(forcastResponse);
-      setForcast(forcastResponse.data.list);
+      setCity(city);
+      setForcast(forecastResponse.data.list);
       setWeather(weatherResponse.data);
+      toast.success(`Weather data for ${city} fetched successfully!`);
     } catch {
       console.error("Error fetching weather data:", error);
       setError("Could not fetch weather data. Please try again.");
+      toast.error("Error fetching weather data. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -54,9 +59,30 @@ const WeatherProvider = ({ children }) => {
     try {
       await axios.post("http://localhost:5000/favorites", { city: cityName });
       fetchFavorites();
+      toast.success(`${cityName} added to favorites!`);
     } catch (error) {
       console.error("Error adding favorite city:", error);
+      toast.error("Error adding favorite city. Please try again.");
     }
+  };
+
+  const removeFavorites = async (cityName) => {
+    try {
+      const response = await axios.get("http://localhost:5000/favorites");
+      const favorite = response.data.find((fav) => fav.city === cityName);
+      if (favorite) {
+        await axios.delete(`http://localhost:5000/favorites/${favorite.id}`);
+        fetchFavorites();
+        toast.success(`${cityName} removed from favorites!`);
+      }
+    } catch (error) {
+      console.log("error removing favorite city");
+      toast.error("Error removing favorite city. Please try again.");
+    }
+  };
+
+  const convertTemperature = (temp) => {
+    return units === "metric" ? temp : (temp * 9) / 5 + 32;
   };
 
   return (
@@ -70,7 +96,11 @@ const WeatherProvider = ({ children }) => {
         loading,
         addFavorite,
         fetchFavorites,
+        removeFavorites,
         favorites,
+        units,
+        setUnits,
+        convertTemperature,
       }}
     >
       {children}

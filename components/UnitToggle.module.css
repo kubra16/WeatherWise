@@ -1,0 +1,27 @@
+.unitToggle {
+    margin-top: 20px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.unitToggle button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    /* background-color: #1e90ff; */
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.unitToggle button:hover {
+    /* background-color: #1c86ee; */
+    transform: translateY(-2px);
+}
+
+.unitToggle button:active {
+    transform: translateY(0);
+    background-color: #C3B3EE;
+}

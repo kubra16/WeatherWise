@@ -1,5 +1,15 @@
-import "@/styles/globals.css";
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/globals.css";
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <Component {...pageProps} />
+      <ToastContainer position="bottom-right" />
+    </>
+  );
 }
+
+export default MyApp;

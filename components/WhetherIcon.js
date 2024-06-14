@@ -5,7 +5,7 @@ import Rainny from "../svg/Rainny.svg";
 import LightRain from "../svg/LightRain.svg";
 import Sunny from "../svg/Sunny.svg";
 const WhetherIcon = ({ weather }) => {
-  console.log(weather);
+  // console.log(weather);
   const getwhetherIcon = (weather) => {
     if (weather.includes("Clouds")) {
       return <Cloudy />;

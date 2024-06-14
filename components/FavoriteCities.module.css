@@ -2,3 +2,46 @@
     margin-top: 2rem;
     text-align: center;
 }
+
+.favoritesList{
+    list-style-type: none;
+        padding: 0;
+}
+
+.favoriteItem{
+    display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 5px;
+}
+
+.cityName{
+    cursor: pointer;
+        font-size: 20px;
+        color: #C3B3EE;
+}
+.cityName:hover {
+    text-decoration: underline;
+}
+
+.removeButton {
+    padding: 10px 10px;
+    font-size: 17px;
+    color: white;
+    background-color: #d9534f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.removeButton:hover {
+    background-color: #c9302c;
+}
+
+.noData{
+    margin: 1rem 0 ;
+    font-size: 1.2rem;
+    
+}

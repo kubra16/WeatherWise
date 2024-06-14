@@ -1,15 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import { WeatherContext } from "../context/WeatherContext";
 import WhetherIcon from "./WhetherIcon";
 import style from "./WhetherDisplay.module.css";
+import UnitToggle from "./UnitToggle";
 
 const WeatherDisplay = () => {
-  const { loading, city, weather, forcast, addFavorite } =
-    useContext(WeatherContext);
-
-  console.log(weather?.weather[0]?.main);
-
+  const {
+    loading,
+    city,
+    weather,
+    forcast,
+    addFavorite,
+    favorites,
+    units,
+    convertTemperature,
+  } = useContext(WeatherContext);
+  const temperature = convertTemperature(weather.main.temp);
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -18,15 +25,28 @@ const WeatherDisplay = () => {
       <div className={style.weatherContainer}>
         {weather && (
           <>
-            <h2>Weather in {city}</h2>
-            <div>
-              <p>Temerature : {weather.main.temp}°</p>
-              <p>condition : {weather.weather[0].description}</p>
+            <h2 className={style.weatherTitle}>Weather in {city}</h2>
+            <div className={style.weatherDetails}>
+              <p className={style.temperature}>
+                Temperature: {temperature.toFixed(2)}°
+                {units === "metric" ? "C" : "F"}
+              </p>
+              <UnitToggle />
+              <p className={style.condition}>
+                condition : {weather.weather[0].description}
+              </p>
             </div>
-            <button onClick={() => addFavorite(city)}>
-              Add {city} to favorites
-            </button>
-            <h3>5 day Forecast</h3>
+            {favorites.some((fav) => fav.city === city) ? (
+              <p className={style.condition}>{city} is already in favorites</p>
+            ) : (
+              <button
+                className={style.button}
+                onClick={() => addFavorite(city)}
+              >
+                Add {city} to favorites
+              </button>
+            )}
+            <h3 className={style.temperature}>5 days Forecast</h3>
             <div className={style.forcast}>
               {forcast.map((day, index) => (
                 <div key={index} className={style.forcastContainer}>
