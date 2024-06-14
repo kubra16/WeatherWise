@@ -16,7 +16,7 @@ const WeatherDisplay = () => {
     units,
     convertTemperature,
   } = useContext(WeatherContext);
-  const temperature = convertTemperature(weather.main.temp);
+  const temperature = convertTemperature(weather?.main?.temp);
   if (loading) {
     return <LoadingSpinner />;
   }
