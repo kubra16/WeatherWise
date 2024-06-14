@@ -43,15 +43,9 @@ Weather Wise is a weather dashboard application that allows users to search for 
       npm install
    ```
 
-## or
-
-    ```
-    yarn install
-    ```
-
 3. Set up the environment variables:
 
-### Create a .env.local file in the root of the project with the following content:
+##### Create a .env.local file in the root of the project with the following content:
 
     ```bash
        NEXT_PUBLIC_API_KEY=your_openweathermap_api_key
