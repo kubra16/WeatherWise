@@ -86,13 +86,10 @@ body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
+  /* color: rgb(var(--foreground-rgb)); */
+  background-color: #424242
     rgb(var(--background-start-rgb));
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 a {
