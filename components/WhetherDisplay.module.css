@@ -1,0 +1,36 @@
+.loadingSpinner{
+    display: flex;
+    flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+}
+
+.weatherContainer {
+    margin: 2rem;
+    padding: 2rem;
+    max-height: 40rem;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.forcast{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+}
+
+.forcastContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 20rem;
+    width: 20rem;
+    gap:2rem;
+    border-radius: 1rem;
+    background-color: #2c2c2c;
+}
