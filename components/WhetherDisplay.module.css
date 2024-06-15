@@ -78,3 +78,12 @@
     color: #b8b8b8;
     margin: 1rem 0;
 }
+
+.error{
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    color: rgb(191, 58, 58);
+}

@@ -14,11 +14,16 @@ const WeatherDisplay = () => {
     addFavorite,
     favorites,
     units,
+    error,
     convertTemperature,
   } = useContext(WeatherContext);
   const temperature = convertTemperature(weather?.main?.temp);
   if (loading) {
     return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <p className={style.error}>{error}</p>;
   }
   return (
     <>

@@ -45,16 +45,14 @@ Weather Wise is a weather dashboard application that allows users to search for 
 
 3. Set up the environment variables:
 
-##### Create a .env.local file in the root of the project with the following content:
+   ##### Create a .env.local file in the root of the project with the following content:
 
-    ```bash
-       NEXT_PUBLIC_API_KEY=your_openweathermap_api_key
-    ```
+   NEXT_PUBLIC_API_KEY=your_openweathermap_api_key
 
 4. Start a JSON server:
 
    ```bash
-      npx json-server --watch db.json --port 5000
+      npx json-server --watch server.json --port 5000
    ```
 
 5. Start the development server:

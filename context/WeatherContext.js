@@ -35,11 +35,9 @@ const WeatherProvider = ({ children }) => {
       setCity(city);
       setForcast(forecastResponse.data.list);
       setWeather(weatherResponse.data);
-      toast.success(`Weather data for ${city} fetched successfully!`);
     } catch {
       console.error("Error fetching weather data:", error);
       setError("Could not fetch weather data. Please try again.");
-      toast.error("Error fetching weather data. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -94,6 +92,8 @@ const WeatherProvider = ({ children }) => {
         forcast,
         weather,
         loading,
+        error,
+        setError,
         addFavorite,
         fetchFavorites,
         removeFavorites,
