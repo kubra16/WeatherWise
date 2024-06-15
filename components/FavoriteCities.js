@@ -6,7 +6,6 @@ const FavoriteCities = () => {
   const { favorites, removeFavorites, handleWeather } =
     useContext(WeatherContext);
 
-  console.log(favorites);
   return (
     <>
       <div className={styles.favoritesContainer}>

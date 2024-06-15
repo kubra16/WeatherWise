@@ -32,6 +32,7 @@ const WeatherProvider = ({ children }) => {
       const forecastResponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&appid=${apiKey}`
       );
+      setError("");
       setCity(city);
       setForcast(forecastResponse.data.list);
       setWeather(weatherResponse.data);
@@ -47,7 +48,7 @@ const WeatherProvider = ({ children }) => {
     try {
       const response = await axios.get("http://localhost:5000/favorites");
       setFavorites(response.data);
-      console.log(response);
+      setError("");
     } catch (err) {
       console.log("Error fetching favorite cities", error);
     }
@@ -58,6 +59,7 @@ const WeatherProvider = ({ children }) => {
       await axios.post("http://localhost:5000/favorites", { city: cityName });
       fetchFavorites();
       toast.success(`${cityName} added to favorites!`);
+      setError("");
     } catch (error) {
       console.error("Error adding favorite city:", error);
       toast.error("Error adding favorite city. Please try again.");
@@ -72,6 +74,7 @@ const WeatherProvider = ({ children }) => {
         await axios.delete(`http://localhost:5000/favorites/${favorite.id}`);
         fetchFavorites();
         toast.success(`${cityName} removed from favorites!`);
+        setError("");
       }
     } catch (error) {
       console.log("error removing favorite city");
