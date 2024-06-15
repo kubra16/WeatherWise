@@ -33,7 +33,7 @@ Weather Wise is a weather dashboard application that allows users to search for 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/WeatherWise.git
+   git clone https://github.com/kubra16/WeatherWise.git
    cd WeatherWise
    ```
 
